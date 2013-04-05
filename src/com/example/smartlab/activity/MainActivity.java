@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.baidu.mapapi.a;
 import com.smartlab.JSONtool.JSONArray;
 import com.smartlab.JSONtool.JSONObject;
 import com.smartlab.connection.MobileClientApp;
@@ -78,6 +79,7 @@ public class MainActivity extends ListActivity {
 				try {
 					mData = getData();
 					MyAdapter adapter = new MyAdapter(MainActivity.this);
+					//adapter.notifyDataSetChanged();
 					setListAdapter(adapter);
 
 				} catch (Exception e) {
@@ -150,10 +152,16 @@ public class MainActivity extends ListActivity {
 						atomno = Integer.parseInt(a.getPatomno());
 					} catch (Exception e) {
 						// TODO: handle exception
-						// Toast.makeText(getApplicationContext(),"转换异常",
-						// Toast.LENGTH_SHORT).show();
+			
 						return false;
 					}
+					
+//					//更新显示
+//					if(parklist.get(atomno).getPatomno().equals(a.getPatomno())){
+//						//parklist.remove(atomno);
+//						
+//					}
+					
 					if (atomno == 0) {
 						return false;
 					}
@@ -166,7 +174,7 @@ public class MainActivity extends ListActivity {
 							parklist.set(atomno - 1, a);
 						}
 					}
-
+					
 					return true;
 
 				}
@@ -219,28 +227,42 @@ public class MainActivity extends ListActivity {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
 		Map<String, Object> map = null;
-		for (int i = 1; i < parklist.size() + 1; i++) {
-
+		//for (int i = 1; i < parklist.size() + 1; i++) {
+		for (int i = 1; i < 9; i++) {
 			map = new HashMap<String, Object>();
-			ParkAtom tpa = parklist.get(i - 1);
-			try {
-				if (tpa.getStatus().equals("01")) {
+			//if(parklist.get(i).getPatomno().equals(object))
+			if(parklist.size()>=i){
+				ParkAtom tpa =parklist.get(i-1);
+				try{
+					int inn=Integer.parseInt(tpa.getPatomno());
+					if(inn==i){
+						try {
+							if (tpa.getStatus().equals("01")) {
 
-					map.put("parkNO", tpa.getPatomno());
-					map.put("chewei", R.drawable.pcar2);
-					map.put("parkim", R.drawable.car);
-					map.put("static", tpa.getStatus());
-					map.put("userid", tpa.getCardno());
-				} else {
-					map.put("parkNO", tpa.getPatomno());
-					map.put("chewei", R.drawable.pcar1);
-					map.put("static", tpa.getStatus());
-					map.put("parkim", R.drawable.white);
-					// map.put("userid", "B123");
+								map.put("parkNO", tpa.getPatomno());
+								map.put("chewei", R.drawable.pcar2);
+								map.put("parkim", R.drawable.car);
+								map.put("static", tpa.getStatus());
+								map.put("userid", tpa.getCardno());
+							} else {
+								map.put("parkNO", tpa.getPatomno());
+								map.put("chewei", R.drawable.pcar1);
+								map.put("static", tpa.getStatus());
+								map.put("parkim", R.drawable.white);
+								// map.put("userid", "B123");
+							}
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+					}else{
+						map.put("parkNO","000"+i+"无信息");
+					}
 				}
-			} catch (Exception e) {
-				// TODO: handle exception
+				catch (Exception e) {
+					// TODO: handle exception
+				}
 			}
+			
 
 			System.out.println(list);
 			list.add(i - 1, map);
