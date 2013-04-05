@@ -1,10 +1,10 @@
 package com.example.smartlab.activity;
 
-import com.baidu.mapapi.GeoPoint;
-import com.baidu.mapapi.MapActivity;
+
 import com.smartlab.JSONtool.JSONObject;
 import com.smartlab.connection.MobileClientApp;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,7 +18,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 
-public class ChooseArea extends MapActivity{
+public class ChooseArea extends Activity{
 
 	Spinner citychoose;
 	Spinner streetchoose;
@@ -122,42 +122,5 @@ public class ChooseArea extends MapActivity{
 		}
 		return res;
 	}
-//	// 判断网络状态
-//		private void checkNET() {
-//			boolean flag = false;
-//			ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-//			if (manager.getActiveNetworkInfo() != null) {
-//				flag = manager.getActiveNetworkInfo().isAvailable();
-//			}
-//			if (!flag) {
-//				AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//				builder.setIcon(android.R.drawable.ic_dialog_alert);
-//				builder.setTitle("网络状态");
-//				builder.setMessage("当前网络不可用，是否设置网络？");
-//				builder.setPositiveButton("设置",
-//						new DialogInterface.OnClickListener() {
-//							public void onClick(DialogInterface dialog, int which) {
-//								Intent intent = new Intent(
-//										android.provider.Settings.ACTION_SETTINGS);
-//								startActivityForResult(intent, 0);
-//							}
-//						});
-//				builder.setNegativeButton("取消",
-//						new DialogInterface.OnClickListener() {
-//
-//							@Override
-//							public void onClick(DialogInterface dialog, int which) {
-//								dialog.cancel();
-//							}
-//						});
-//				builder.create();
-//				builder.show();
-//			}
-//
-//		}
-	@Override
-	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }
+

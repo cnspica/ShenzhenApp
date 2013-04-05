@@ -100,10 +100,10 @@ public class MainActivity extends ListActivity {
 				public void run() {
 					while(flag){
 						try {
-							Thread.sleep(1);
+							Thread.sleep(2500);
 							getParkInfo();
 							
-							handler.sendEmptyMessage(1000);
+							handler.sendEmptyMessage(0);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -265,12 +265,20 @@ public class MainActivity extends ListActivity {
 	}
 
 	// ListView 中某项被选中后的逻辑
-//	 @Override
-//	 protected void onListItemClick(ListView l, View v, int position, long id)
-//	 {
-//	
-//	 Log.v("", (String)mData.get(position).get("parkna"));
-//	 }
+	 @Override
+	 protected void onListItemClick(ListView l, View v, int position, long id)
+	 {
+	
+	 //Log.v("", (String)mData.get(position).get("parkNO"));
+		 AlertDialog alertDialog = new AlertDialog.Builder(this)
+			.setMessage("这里是时间"+position)
+			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					return;
+				}
+			}).create(); // 创建对话框
+	alertDialog.show(); // 显示对话框
+	 }
 	/**
 	 * listview中点击按键弹出对话框
 	 */

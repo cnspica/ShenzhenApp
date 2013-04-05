@@ -1,16 +1,16 @@
 package com.example.smartlab.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
-import com.baidu.mapapi.MapActivity;
 
 
 @SuppressLint("HandlerLeak")
-public class FirstEnter extends MapActivity {
+public class FirstEnter extends Activity {
 
 	private final int TIME_UP = 1;
 	@SuppressLint("HandlerLeak")
@@ -63,9 +63,5 @@ public class FirstEnter extends MapActivity {
 		return true;
 	}
 
-	@Override
-	protected boolean isRouteDisplayed() {
-		return false;
-	}
 	
 }
