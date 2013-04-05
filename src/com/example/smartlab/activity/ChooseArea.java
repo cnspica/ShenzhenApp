@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,7 +29,7 @@ public class ChooseArea extends MapActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.area);
-		//checkNET();
+		checkNET();
 		
 		
 		//获取城市列表
@@ -68,7 +69,39 @@ public class ChooseArea extends MapActivity{
 			}
 		});
 	}
+	// 判断网络状态
+	private void checkNET() {
+		boolean flag = false;
+		ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (manager.getActiveNetworkInfo() != null) {
+			flag = manager.getActiveNetworkInfo().isAvailable();
+		}
+		if (!flag) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(ChooseArea.this);
+			builder.setIcon(android.R.drawable.ic_dialog_alert);
+			builder.setTitle("网络状态");
+			builder.setMessage("当前网络不可用，是否设置网络？");
+			builder.setPositiveButton("设置",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							Intent intent = new Intent(
+									android.provider.Settings.ACTION_SETTINGS);
+							startActivityForResult(intent, 0);
+						}
+					});
+			builder.setNegativeButton("取消",
+					new DialogInterface.OnClickListener() {
 
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.cancel();
+						}
+					});
+			builder.create();
+			builder.show();
+		}
+
+	}
 	//解析
 	public static String getValue(String key,String fullMsg){
 		JSONObject jsonObj=new JSONObject(fullMsg);

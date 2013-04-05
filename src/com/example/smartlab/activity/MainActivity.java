@@ -10,6 +10,7 @@ import com.smartlab.JSONtool.JSONArray;
 import com.smartlab.JSONtool.JSONObject;
 import com.smartlab.connection.MobileClientApp;
 
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -64,7 +65,6 @@ public class MainActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		d = new ProgressDialog(MainActivity.this);
 		d.setMessage("信息加载中......");
 		d.closeOptionsMenu();
@@ -76,7 +76,6 @@ public class MainActivity extends ListActivity {
 			public void handleMessage(Message msg) {
 				d.dismiss();
 				try {
-//					getParkInfo();
 					mData = getData();
 					MyAdapter adapter = new MyAdapter(MainActivity.this);
 					setListAdapter(adapter);
@@ -88,10 +87,6 @@ public class MainActivity extends ListActivity {
 					// Toast.LENGTH_SHORT).show();
 				}
 			}
-
-			
-			
-			
 		};
 		
 		try {
@@ -195,69 +190,8 @@ public class MainActivity extends ListActivity {
 			}
 		});
 	}
+	
 
-//	// 取车位信息
-//	public void getParkInfo() {
-//		MobileClientApp parkin = new MobileClientApp();
-//		System.out.println(setValue("action", "getinfo", parkmsg));
-//		parkinfo = parkin.write(setValue("action", "getinfo", parkmsg));
-//		try {
-//			result = new JSONArray(parkinfo);
-//
-//			num = result.length();
-//			for (int i = 0; i < num; i++) {
-//				JSONObject jj = result.getJSONObject(i);
-//				ParkAtom pa = new ParkAtom();
-//				pa.setCardno(jj.optString("cardno"));
-//				pa.setCityname(jj.optString("cityname"));
-//				pa.setStatus(jj.optString("status"));
-//				pa.setStreet(jj.optString("street"));
-//				pa.setAblock(jj.optString("ablock"));
-//				pa.setPatomno(jj.optString("magnetno"));
-//				// System.out.println(pa.getPatomno());
-//				boolean res = update(pa);
-//				if (res == true) {
-//					needUpdate = true;
-//					handler.sendEmptyMessage(0);
-//					needUpdate = false;
-//				}
-//			}
-//			System.out.println(num);
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			Toast.makeText(getApplicationContext(), "网络异常", Toast.LENGTH_SHORT)
-//					.show();
-//		}
-//
-//	}
-//
-//	// 更新arraylist
-//	public boolean update(ParkAtom a) {
-//		int atomno = 0;
-//		try {
-//			atomno = Integer.parseInt(a.getPatomno());
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			// Toast.makeText(getApplicationContext(),"转换异常",
-//			// Toast.LENGTH_SHORT).show();
-//			return false;
-//		}
-//		if (atomno == 0) {
-//			return false;
-//		}
-//		if (atomno > parklist.size()) {
-//			parklist.add(a);
-//		} else {
-//			ParkAtom temp = parklist.get(atomno - 1);
-//			if (!a.equals(temp)) {
-//				a.setIsupdate(false);
-//				parklist.set(atomno - 1, a);
-//			}
-//		}
-//
-//		return true;
-//
-//	}
 
 	// 封装
 	public static String setValue(String key, String value, String fullMsg) {
