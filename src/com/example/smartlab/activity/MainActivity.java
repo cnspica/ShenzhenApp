@@ -1,20 +1,15 @@
 package com.example.smartlab.activity;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.baidu.mapapi.a;
 import com.smartlab.JSONtool.JSONArray;
 import com.smartlab.JSONtool.JSONObject;
 import com.smartlab.connection.MobileClientApp;
-
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -23,7 +18,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,7 +29,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 @SuppressLint("HandlerLeak")
 public class MainActivity extends ListActivity {

@@ -2,8 +2,6 @@ package com.example.smartlab.activity;
 
 
 import com.smartlab.JSONtool.JSONObject;
-import com.smartlab.connection.MobileClientApp;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;

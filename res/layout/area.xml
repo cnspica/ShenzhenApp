@@ -7,9 +7,10 @@
         <TextView 
          	android:layout_marginTop="20dp"
 	        android:layout_width="wrap_content"
+	        android:layout_marginLeft="5dp"
 	        android:text="请选择要查看的城市街道"
 	        android:textColor="#000000"
-	        android:textSize="15sp"
+	        android:textSize="20sp"
 	        android:layout_height="wrap_content"/>
 
     <LinearLayout
@@ -43,6 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:textSize="20sp"
             android:background="@drawable/btn"
             android:text="确定" />
