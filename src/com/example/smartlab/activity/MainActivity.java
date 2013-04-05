@@ -23,6 +23,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,6 +33,7 @@ import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -98,10 +100,10 @@ public class MainActivity extends ListActivity {
 				public void run() {
 					while(flag){
 						try {
-							Thread.sleep(5000);
+							Thread.sleep(1);
 							getParkInfo();
 							
-							handler.sendEmptyMessage(1);
+							handler.sendEmptyMessage(1000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -129,18 +131,11 @@ public class MainActivity extends ListActivity {
 							pa.setPatomno(jj.optString("magnetno"));
 							// System.out.println(pa.getPatomno());
 							boolean res = update(pa);
-//							if (res == true) {
-//								needUpdate = true;
-//								handler.sendEmptyMessage(0);
-//								needUpdate = false;
-//							}
 						}
 						System.out.println(num);
 					} catch (Exception e) {
 						// TODO: handle exception
 						e.printStackTrace();
-//						Toast.makeText(getApplicationContext(), "网络异常", Toast.LENGTH_SHORT)
-//								.show();
 					}
 
 				}
@@ -155,13 +150,6 @@ public class MainActivity extends ListActivity {
 			
 						return false;
 					}
-					
-//					//更新显示
-//					if(parklist.get(atomno).getPatomno().equals(a.getPatomno())){
-//						//parklist.remove(atomno);
-//						
-//					}
-					
 					if (atomno == 0) {
 						return false;
 					}
@@ -255,7 +243,11 @@ public class MainActivity extends ListActivity {
 							// TODO: handle exception
 						}
 					}else{
-						map.put("parkNO","000"+i+"无信息");
+						if(i<10){
+							map.put("parkNO","000"+i+"无信息");
+							}else if(i>=10&&i<100){
+								map.put("parkNO","00"+i+"无信息");
+								}
 					}
 				}
 				catch (Exception e) {
@@ -273,12 +265,12 @@ public class MainActivity extends ListActivity {
 	}
 
 	// ListView 中某项被选中后的逻辑
-	// @Override
-	// protected void onListItemClick(ListView l, View v, int position, long id)
-	// {
-	//
-	// Log.v("", (String)mData.get(position).get("parkna"));
-	// }
+//	 @Override
+//	 protected void onListItemClick(ListView l, View v, int position, long id)
+//	 {
+//	
+//	 Log.v("", (String)mData.get(position).get("parkna"));
+//	 }
 	/**
 	 * listview中点击按键弹出对话框
 	 */
@@ -392,6 +384,7 @@ public class MainActivity extends ListActivity {
 					public void onClick(DialogInterface dialog, int which) {
 						flag = false;
 						System.exit(0);
+						android.os.Process.killProcess(android.os.Process.myPid());
 					}
 				})
 				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
