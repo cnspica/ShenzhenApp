@@ -52,7 +52,6 @@ public class ChooseArea extends Activity{
 		streetchoose.setAdapter(aastreet);
 		//streetchoose.setPrompt("ËÑË÷");
 		
-		
 		enter=(Button)findViewById(R.id.Enter);
 		enter.setOnClickListener(new OnClickListener() {
 			@Override

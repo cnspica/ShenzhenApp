@@ -80,8 +80,6 @@ public class MainActivity extends ListActivity {
 				} catch (Exception e) {
 					// TODO: handle exception
 					e.printStackTrace();
-					// Toast.makeText(getApplicationContext(), "网络超时，未连接",
-					// Toast.LENGTH_SHORT).show();
 				}
 			}
 		};
@@ -95,7 +93,6 @@ public class MainActivity extends ListActivity {
 						try {
 							Thread.sleep(2500);
 							getParkInfo();
-							
 							handler.sendEmptyMessage(0);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
@@ -130,7 +127,6 @@ public class MainActivity extends ListActivity {
 						// TODO: handle exception
 						e.printStackTrace();
 					}
-
 				}
 				
 				// 更新arraylist
@@ -208,10 +204,8 @@ public class MainActivity extends ListActivity {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
 		Map<String, Object> map = null;
-		//for (int i = 1; i < parklist.size() + 1; i++) {
 		for (int i = 1; i < 9; i++) {
 			map = new HashMap<String, Object>();
-			//if(parklist.get(i).getPatomno().equals(object))
 			if(parklist.size()>=i){
 				ParkAtom tpa =parklist.get(i-1);
 				try{
@@ -236,11 +230,11 @@ public class MainActivity extends ListActivity {
 							// TODO: handle exception
 						}
 					}else{
-						if(i<10){
+//						if(i<10){
 							map.put("parkNO","000"+i+"无信息");
-							}else if(i>=10&&i<100){
-								map.put("parkNO","00"+i+"无信息");
-								}
+//							}else if(i>=10&&i<100){
+//								map.put("parkNO","00"+i+"无信息");
+//								}
 					}
 				}
 				catch (Exception e) {
@@ -258,20 +252,20 @@ public class MainActivity extends ListActivity {
 	}
 
 	// ListView 中某项被选中后的逻辑
-	 @Override
-	 protected void onListItemClick(ListView l, View v, int position, long id)
-	 {
-	
-	 //Log.v("", (String)mData.get(position).get("parkNO"));
-		 AlertDialog alertDialog = new AlertDialog.Builder(this)
-			.setMessage("这里是时间"+position)
-			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int which) {
-					return;
-				}
-			}).create(); // 创建对话框
-	alertDialog.show(); // 显示对话框
-	 }
+//	 @Override
+//	 protected void onListItemClick(ListView l, View v, int position, long id)
+//	 {
+//	
+//	 //Log.v("", (String)mData.get(position).get("parkNO"));
+//		 AlertDialog alertDialog = new AlertDialog.Builder(this)
+//			.setMessage("这里是时间"+position)
+//			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//				public void onClick(DialogInterface dialog, int which) {
+//					return;
+//				}
+//			}).create(); // 创建对话框
+//	alertDialog.show(); // 显示对话框
+//	 }
 	/**
 	 * listview中点击按键弹出对话框
 	 */
@@ -373,6 +367,9 @@ public class MainActivity extends ListActivity {
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
 			this.showTips();
 			return false;
+		}
+		if(keyCode ==KeyEvent.KEYCODE_MENU){
+			return true;
 		}
 		return false;
 	}
