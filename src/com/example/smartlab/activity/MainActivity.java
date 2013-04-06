@@ -91,7 +91,7 @@ public class MainActivity extends ListActivity {
 				public void run() {
 					while(flag){
 						try {
-							Thread.sleep(2500);
+							Thread.sleep(2000);
 							getParkInfo();
 							handler.sendEmptyMessage(0);
 						} catch (InterruptedException e) {
@@ -106,6 +106,18 @@ public class MainActivity extends ListActivity {
 					MobileClientApp parkin = new MobileClientApp();
 					System.out.println(setValue("action", "getinfo", parkmsg));
 					parkinfo = parkin.write(setValue("action", "getinfo", parkmsg));
+					//判断是否获取
+					if(parkinfo==null){
+						 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+							.setMessage("获取信息失败!")
+							.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int which) {
+									return;
+								}
+							}).create(); // 创建对话框
+					alertDialog.show(); // 显示对话框
+					}
+					
 					try {
 						result = new JSONArray(parkinfo);
 
@@ -318,7 +330,6 @@ public class MainActivity extends ListActivity {
 				holder.chewei = (ImageView) convertView
 						.findViewById(R.id.reside);
 
-				// holder.chewei.setText
 				holder.parkim = (ImageView) convertView
 						.findViewById(R.id.parkIM);
 
@@ -326,8 +337,6 @@ public class MainActivity extends ListActivity {
 						.findViewById(R.id.userID);
 
 				convertView.setTag(holder);
-
-				// System.out.println(position);
 
 			} else {
 
