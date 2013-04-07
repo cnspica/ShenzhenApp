@@ -62,7 +62,7 @@ public class MainActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		d = new ProgressDialog(MainActivity.this);
-		d.setMessage("信息加载中......");
+		d.setMessage("信息加载中......"); 
 		d.closeOptionsMenu();
 		d.setCancelable(false);// 显示时禁止触摸屏幕
 		d.show();
@@ -71,6 +71,17 @@ public class MainActivity extends ListActivity {
 			@Override
 			public void handleMessage(Message msg) {
 				d.dismiss();
+				//判断是否获取
+//				if(parkinfo==null){
+//					 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+//						.setMessage("获取信息失败!")
+//						.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//							public void onClick(DialogInterface dialog, int which) {
+//								return;
+//							}
+//						}).create(); // 创建对话框
+//				alertDialog.show(); // 显示对话框
+//				}
 				try {
 					mData = getData();
 					MyAdapter adapter = new MyAdapter(MainActivity.this);
@@ -106,17 +117,6 @@ public class MainActivity extends ListActivity {
 					MobileClientApp parkin = new MobileClientApp();
 					System.out.println(setValue("action", "getinfo", parkmsg));
 					parkinfo = parkin.write(setValue("action", "getinfo", parkmsg));
-					//判断是否获取
-					if(parkinfo==null){
-						 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
-							.setMessage("获取信息失败!")
-							.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int which) {
-									return;
-								}
-							}).create(); // 创建对话框
-					alertDialog.show(); // 显示对话框
-					}
 					
 					try {
 						result = new JSONArray(parkinfo);
