@@ -51,6 +51,7 @@ public class MainActivity extends ListActivity {
 	JSONArray result;
 	JSONArray backup;
 	static Boolean flag = true;
+	int show=1;
 	private ProgressDialog d;
 
 	private List<Map<String, Object>> mData;
@@ -72,16 +73,20 @@ public class MainActivity extends ListActivity {
 			public void handleMessage(Message msg) {
 				d.dismiss();
 				//判断是否获取
-//				if(parkinfo==null){
-//					 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
-//						.setMessage("获取信息失败!")
-//						.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//							public void onClick(DialogInterface dialog, int which) {
-//								return;
-//							}
-//						}).create(); // 创建对话框
-//				alertDialog.show(); // 显示对话框
-//				}
+				if(show==1){
+					if(parkinfo==null){
+						 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+							.setMessage("获取信息失败!")
+							.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int which) {
+									return;
+								}
+							}).create(); // 创建对话框
+					alertDialog.show(); // 显示对话框
+					}
+					show=0;
+				}
+				
 				try {
 					mData = getData();
 					MyAdapter adapter = new MyAdapter(MainActivity.this);
@@ -263,7 +268,7 @@ public class MainActivity extends ListActivity {
 		return list;
 	}
 
-	// ListView 中某项被选中后的逻辑
+	 //ListView 中某项被选中后的逻辑
 //	 @Override
 //	 protected void onListItemClick(ListView l, View v, int position, long id)
 //	 {

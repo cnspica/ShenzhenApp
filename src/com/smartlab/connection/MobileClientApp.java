@@ -5,7 +5,7 @@ public class MobileClientApp {
 	
 
 	public String write(String msg) {
-		String back = MobileClientService.WriteMsgToMSForCallBack("121.34.116.123",
+		String back = MobileClientService.WriteMsgToMSForCallBack("42.121.130.21",
 				7777, msg);
 
 		System.out.println("client rev:" + back);
